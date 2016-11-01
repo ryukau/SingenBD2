@@ -4,10 +4,10 @@
 
 [デモを見る](https://ryukau.github.io/SingenBD2)
 
-# 使用ライブラリ
+## 使用ライブラリ
 
 - [bezier-easing](https://github.com/gre/bezier-easing)
 
-# ライセンス
+## ライセンス
 
 MIT Lisenceとします。
