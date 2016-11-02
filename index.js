@@ -29,7 +29,6 @@ function save(wave) {
     buffer.length)
 
   var blob = new Blob([header, buffer], { type: "application/octet-stream" })
-  // var blob = new Blob([header, buffer], { type: "audio/wav" })
   var url = window.URL.createObjectURL(blob)
 
   var clickEvent = new MouseEvent("click", {
