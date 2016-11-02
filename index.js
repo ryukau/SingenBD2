@@ -1,6 +1,10 @@
 const TWO_PI = 2 * Math.PI
 
 function play(audioContext, wave) {
+  if (quickSave) {
+    save(wave)
+  }
+
   var channel = wave.channels
   var frame = wave.frames
   var buffer = audioContext.createBuffer(channel, frame, audioContext.sampleRate)
@@ -17,6 +21,25 @@ function play(audioContext, wave) {
   this.source.buffer = buffer
   this.source.connect(audioContext.destination)
   this.source.start()
+}
+
+function save(wave) {
+  var buffer = Wave.toBuffer(wave, wave.channels)
+  var header = Wave.fileHeader(audioContext.sampleRate, wave.channels,
+    buffer.length)
+
+  var blob = new Blob([header, buffer], { type: "application/octet-stream" })
+  var url = window.URL.createObjectURL(blob)
+
+  var a = document.createElement("a")
+  document.body.appendChild(a)
+  a.style = "display: none"
+  a.href = url
+  a.download = "SingenBD2_" + Date.now() + ".wav"
+  a.click()
+  document.body.removeChild(a)
+
+  window.URL.revokeObjectURL(url)
 }
 
 // lengthは秒数。
@@ -206,6 +229,7 @@ function refresh() {
 var audioContext = new AudioContext()
 
 var isFM = true
+var quickSave = false
 var oscBody = new Oscillator(audioContext)
 var oscHead = new Oscillator(audioContext)
 var oscHeadMod = new Oscillator(audioContext)
@@ -244,6 +268,10 @@ var buttonRandom = new Button(divRenderControls.element, "Random",
   () => random(true))
 var buttonRandomHead = new Button(divRenderControls.element, "RandomHead",
   () => random(false))
+var buttonSave = new Button(divRenderControls.element, "Save",
+  () => save(wave))
+var checkboxQuickSave = new Checkbox(divRenderControls.element, "QuickSave",
+  quickSave, (checked) => { quickSave = checked })
 
 var oscBodyControls = new OscillatorControls(divMain.element, "Body",
   oscBody, 0.01, 1, 0.01, 1, 1, 1000, 100, refresh)
