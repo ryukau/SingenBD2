@@ -242,6 +242,7 @@ var headingTitle = new Heading(divMain.element, 1, "SingenBD2")
 
 var description = new Description(divMain.element)
 description.add("さくっと使う", "SingenBD2はバスドラムを作るシンセサイザーです。まずはRandomボタンを何回か押して音を試してみてください。おおまかな音の雰囲気が気に入ったら、RandomHaedボタンでアタックの質感だけを変えることができます。狙って音を作る場合はPlayボタンで試聴できます。")
+description.add("ファイルの保存", "Saveボタンで作った音をダウンロードして保存できます。ファイルの形式は32bit float、サンプリングレートは環境依存です。QuickSaveにチェックを入れると、Play、Random、RandomHeadボタンで音が再生されるたびにファイルが保存されます。")
 description.add("概説", "中身は3オペレータを直列につないだFMシンセです。出力 <- Body <- Head <- HeadModと接続されています。HeadModは直接操作できませんが、Headのパラメータにほぼ追従します。Body <- Headの変調インデックスがBodyFM、Head <- HeadModの変調インデックスがHeadFMです。")
 description.add("Tips", "TypeをPMにしたときは、BodyのFeedbackを0にしてみてください。また、DeclickInでアタックの鋭さを調整できます。")
 
