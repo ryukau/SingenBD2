@@ -31,22 +31,16 @@ function save(wave) {
   var blob = new Blob([header, buffer], { type: "application/octet-stream" })
   var url = window.URL.createObjectURL(blob)
 
-  var clickEvent = new MouseEvent("click", {
-    "view": window,
-    "bubbles": true,
-    "cancelable": false
-  })
-
   var a = document.createElement("a")
-  document.body.appendChild(a)
   a.style = "display: none"
   a.href = url
   a.download = "SingenBD2_" + Date.now() + ".wav"
-  a.dispatchEvent(clickEvent)
-  document.body.removeChild(a)
-
-  window.location.assign(url)
-  window.URL.revokeObjectURL(url)
+  document.body.appendChild(a)
+  a.click()
+  setTimeout(() => {
+    document.body.removeChild(a)
+    window.URL.revokeObjectURL(url)
+  }, 100)
 }
 
 // lengthは秒数。
