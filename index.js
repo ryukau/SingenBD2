@@ -42,7 +42,6 @@ function save(wave) {
   a.style = "display: none"
   a.href = url
   a.download = "SingenBD2_" + Date.now() + ".wav"
-  // a.click()
   a.dispatchEvent(clickEvent)
   document.body.removeChild(a)
 
